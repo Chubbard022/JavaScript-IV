@@ -1,9 +1,9 @@
 
     class GameObject {
         constructor(attr){
-        this.name = attr.name;
-        this.createdAt = attr.createdAt;
-        this.dimensions = attr.dimensions;
+            this.name = attr.name;
+            this.createdAt = attr.createdAt;
+            this.dimensions = attr.dimensions;
     }
         destroy(){
             return `${this.name} was removed from the game`;
@@ -11,20 +11,17 @@
     }
 
 
-    class CharacterStats extends GameObject {
+    class CharacterStats extends GameObject{
         constructor(attr){
             super(attr);
             this.healthPoints = attr.healthPoints;
         }
         takeDamage(){
-        return `${this.name} took damage`;
-        }
-        newHealth(){
-        return `${this.name} has ${this.healthPoints -10} health left`;
+            return `${this.name} took damage`;
         }
     }
 
-    class Humanoid extends GameObject{
+    class Humanoid extends CharacterStats{
         constructor(attr){
             super(attr);
             this.team = attr.team;
@@ -38,55 +35,55 @@
 //----------------------------------------------------------------------------------------------------------------
 
     const mage = new Humanoid({
-      createdAt: new Date(),
-      dimensions: {
+    createdAt: new Date(),
+    dimensions: {
         length: 2,
         width: 1,
         height: 1,
-      },
-      healthPoints: 5,
-      name: 'Bruce',
-      team: 'Mage Guild',
-      weapons: [
+    },
+    healthPoints: 5,
+    name: 'Bruce',
+    team: 'Mage Guild',
+    weapons: [
         'Staff of Shamalama',
-      ],
-      language: 'Common Tongue',
+    ],
+    language: 'Common Tongue',
     });
-  
-    const swordsman = new Humanoid({
-      createdAt: new Date(),
-      dimensions: {
-        length: 2,
-        width: 2,
-        height: 2,
-      },
-      healthPoints: 15,
-      name: 'Sir Mustachio',
-      team: 'The Round Table',
-      weapons: [
-        'Giant Sword',
-        'Shield',
-      ],
-      language: 'Common Tongue',
-    });
-  
-    const archer = new Humanoid({
-      createdAt: new Date(),
-      dimensions: {
-        length: 1,
-        width: 2,
-        height: 4,
-      },
-      healthPoints: 10,
-      name: 'Lilith',
-      team: 'Forest Kingdom',
-      weapons: [
-        'Bow',
-        'Dagger',
-      ],
-      language: 'Elvish',
-    });
-  
+
+const swordsman = new Humanoid({
+    createdAt: new Date(),
+    dimensions: {
+    length: 2,
+    width: 2,
+    height: 2,
+    },
+    healthPoints: 15,
+    name: 'Sir Mustachio',
+    team: 'The Round Table',
+    weapons: [
+    'Giant Sword',
+    'Shield',
+    ],
+    language: 'Common Tongue',
+});
+
+const archer = new Humanoid({
+    createdAt: new Date(),
+    dimensions: {
+    length: 1,
+    width: 2,
+    height: 4,
+    },
+    healthPoints: 10,
+    name: 'Lilith',
+    team: 'Forest Kingdom',
+    weapons: [
+    'Bow',
+    'Dagger',
+    ],
+    language: 'Elvish',
+});
+
     console.log(mage.createdAt); // Today's date
     console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
     console.log(swordsman.healthPoints); // 15
@@ -97,53 +94,39 @@
     console.log(archer.greet()); // Lilith offers a greeting in Elvish.
     console.log(mage.takeDamage()); // Bruce took damage.
     console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-  
-  
-//    //----------------------------------------------------------------------------------------------------------------
-//    //---------------------------------------stretch------------------------------------------------------------------
-  
-//    function Villan(attr){
-//     Humanoid.call(this,attr);
-//   }
-//   //-------------------------------------------Inheritance
-  
-//   Villan.prototype = Object.create(Humanoid.prototype);
-  
-//   //-------------------------------------------Prototypes
-//   Villan.prototype.punch = function(){
-//     return `${this.name} punched`;
-//   }
-  
-//   //----------------------------------------------------------------------------------------------------------------
-//   function Hero(attr){
-//     Humanoid.call(this,attr);
-//   }
-//   //-------------------------------------------Inheritance 
-  
-//   Hero.prototype = Object.create(Humanoid.prototype);
-  
-//   //-------------------------------------------Prototypes
-  
-//   Hero.prototype.protect = function(){
-//     return `the punch was deflected`;
-//   }
-  
-  
-//   //========================================
-//   let superman = new Hero({
-//     name: 'superman',
-//     healthPoints: 20
-//   });
-//   let batman = new Villan({
-//     name: 'batman',
-//     health: 20
-//   });
-//    //----------------------------------------------------------------------------------------------------------------
-//   //-----------------------------------------------------------------------------------------------------------------
-  
-  
-//   //console.log(superman);
-//   // console.log(`superman has ${superman.healthPoints} left`);
-//   // console.log(batman.punch());
-//   // console.log(superman.newHealth());
-  
+//----------------------------------------------------------------------------------------------------------------
+//---------------------------------------stretch------------------------------------------------------------------
+
+    class Villain extends Humanoid{
+        constructor(attr){
+            super(attr);
+        }
+        punch(){
+            return `${this.name} punched`;
+        }
+}
+    class Hero extends Humanoid{
+        constructor(attr){
+        }
+        protect(){
+            return `the punch was deflected`;
+        }
+    }
+
+//========================================
+    let superman = new Hero({
+        name: 'superman',
+        healthPoints: 20
+    });
+    let batman = new Villain({
+        name: 'batman',
+        health: 20
+    });
+//----------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------
+
+
+//console.log(superman);
+// console.log(`superman has ${superman.healthPoints} left`);
+// console.log(batman.punch());
+// console.log(superman.newHealth());
