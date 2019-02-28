@@ -114,7 +114,7 @@ const archer = new Humanoid({
         }
     }
 
-//========================================
+//======================================
     let superman = new Hero({
         name: 'superman',
         healthPoints: 20
